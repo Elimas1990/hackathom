@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.scss';
 import NavbarContainer from './components/Navbar/NavbarContainer';
 import Home from './page/Home';
 import Streams from './page/Streams';
+import './App.scss';
 
 function App() {
   return (
