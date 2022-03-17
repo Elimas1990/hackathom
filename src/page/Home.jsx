@@ -1,7 +1,12 @@
+import { CarouselContainer } from "../components/carouselsContainer/carouselsContainer"
+import { NextEventContainer } from "../components/nextEventContainer/nextEventContainer"
+
 const Home = () =>{
     return (
         <>
-            <h1>HOLA</h1>
+            <CarouselContainer/>
+            <hr></hr>
+            <NextEventContainer/>
         </>
     )
 }

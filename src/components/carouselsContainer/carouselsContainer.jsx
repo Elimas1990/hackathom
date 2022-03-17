@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useState}from "react";
 import './carouselsContainer.css';
 import { CarouselItem } from "../carouselsItem/carouselsItem";
 
@@ -27,7 +27,7 @@ export const CarouselContainer = () => {
         }
         ]
     )
-
+    const [orden, setOrden] = useState(true);
     return (   
               <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
                   <div className="carousel-indicators">
@@ -37,7 +37,9 @@ export const CarouselContainer = () => {
                   </div>
                   <div className="carousel-inner">
                       {
-                          events.map((event) => <CarouselItem key={event.id}{...event} />)
+                          events.map((event) => <CarouselItem orden={orden} key={event.id}{...event} />
+                     
+                          )
                       }
                   </div>
                   <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">

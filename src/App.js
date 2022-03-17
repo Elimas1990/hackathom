@@ -13,8 +13,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="streams" element={<Streams />} />
-         <Route path="carousel" element={<CarouselContainer />} />
-        <Route path="nextevent" element={<NextEventContainer />} /> 
+        <Route path="carousel" element={<CarouselContainer />} />
+        <Route path="nextevent" element={<NextEventContainer />} />
       </Routes>
     </BrowserRouter>
   );

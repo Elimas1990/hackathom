@@ -34,8 +34,8 @@ export const NextEvent = ({
                     <div className="card-body">
                         <h5 className="card-title">{title}</h5>
                         <p className="card-text">{description}</p>
-                        <p className="card-text"><small className="text-muted">{dateStart.toDate().toLocaleDateString("es-AR", optionsCalendarioLargo)} -- {dateEnd.toDate().toLocaleDateString("es-AR", optionsCalendarioLargo)}</small></p>
-                    </div>
+                      {/*   <p className="card-text"><small className="text-muted">{dateStart.toDate().toLocaleDateString("es-AR", optionsCalendarioLargo)} -- {dateEnd.toDate().toLocaleDateString("es-AR", optionsCalendarioLargo)}</small></p>
+               */}      </div>
                 </div>
             </div>
         </div>
