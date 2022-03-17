@@ -1,6 +1,6 @@
 import React from "react";
 import './nextEvent.css';
-import { Card } from "bootstrap";
+
 
 export const NextEvent = ({
     image,
@@ -23,16 +23,21 @@ export const NextEvent = ({
     return (
 
 
-        <Card className="bg-dark text-white card-event">
-            <Card.Img src={image} alt={title} />
-            <Card.ImgOverlay>
-                <Card.Title>{title}</Card.Title>
-                <Card.Text>
-                    {description}
-                </Card.Text>
-                <Card.Text>  <p>{dateStart.toDate().toLocaleDateString("es-AR", optionsCalendarioLargo)}</p>
-                    <p>{dateEnd.toDate().toLocaleDateString("es-AR", optionsCalendarioLargo)}</p></Card.Text>
-            </Card.ImgOverlay>
-        </Card>
+ 
+
+        <div className="card mb-3 card-event">
+            <div className="row g-0">
+                <div className="col-md-4">
+                    <img src={image} className="img-fluid rounded-start" alt={title}/>
+                </div>
+                <div className="col-md-8">
+                    <div className="card-body">
+                        <h5 className="card-title">{title}</h5>
+                        <p className="card-text">{description}</p>
+                        <p className="card-text"><small className="text-muted">{dateStart.toDate().toLocaleDateString("es-AR", optionsCalendarioLargo)} -- {dateEnd.toDate().toLocaleDateString("es-AR", optionsCalendarioLargo)}</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }

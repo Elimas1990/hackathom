@@ -1,5 +1,9 @@
-.img-carousel{
-    width: 800px;
-    height: 400px;
-    background-color: #373940;
+
+.container{
+    /* min-height: 400px; */
+  /*   width: 100%; */
+    border: 1px solod red;
+    background-color: black;
+  /*   height: 500px;
+    margin-top: 150px; */
 }

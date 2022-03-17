@@ -1,6 +1,5 @@
 import React from "react";
-import './carrselItem.css';
-import { Carousel } from "bootstrap";
+import './carouselsItem.css';
 
 export const CarouselItem = ({
     image,
@@ -12,6 +11,8 @@ export const CarouselItem = ({
 
 
 }) => {
+
+    console.log(image)
     const optionsCalendarioLargo = {
         weekday: "long",
         year: "numeric",
@@ -20,19 +21,16 @@ export const CarouselItem = ({
     }
 
 
+
+
     return (
-            <Carousel.Item>
-                <img
-                    className="d-block w-100 img-carousel"
-                    src={image}
-                    alt={title}
-                />
-                <Carousel.Caption>
-                    <h3>{title}</h3>
-                    <p>{description}</p>
-                    <p>{dateStart.toDate().toLocaleDateString("es-AR", optionsCalendarioLargo)}</p>
-                    <p>{dateEnd.toDate().toLocaleDateString("es-AR", optionsCalendarioLargo)}</p>
-                </Carousel.Caption>
-            </Carousel.Item>
+        <div className="carousel-item active">
+            <img src={image} className="d-block w-100 " alt={title} />
+            <div className="carousel-caption d-none d-md-block">
+                <h5>{title}</h5>
+                <p>{description}</p>
+                {/* <p>{dateStart.toDate().toLocaleDateString("es-AR", optionsCalendarioLargo)} -- {dateEnd.toDate().toLocaleDateString("es-AR", optionsCalendarioLargo)}</p> */}
+            </div>
+        </div>
     );
 }
