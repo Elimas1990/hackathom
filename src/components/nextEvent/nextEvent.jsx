@@ -33,7 +33,7 @@ export const NextEvent = ({
                     <div className="card-body">
                         <h5 className="card-title m-0  mb-1">{nombreEvento}</h5>
                         <p className="card-text m-0 mt-1 mb-1">{descripcionEvento}</p>
-                        <button type="button" class="btn btn-secondary btn-sm me-3">Inscribirse</button><button type="button" class="btn btn-secondary btn-sm">Preguntas</button>
+                        <button type="button" class="btn btn-secondary btn-sm me-3">Ver Evento</button>{/* <button type="button" class="btn btn-secondary btn-sm">Preguntas</button> */}
                     </div>
                   
                 </div>
