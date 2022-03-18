@@ -19,9 +19,11 @@ const NavbarContainer = () => {
                             <Link className="nav-link text-purple link-page" to="/">Home</Link>
                         
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link text-purple link-page" to="/streams">Eventos</Link>
-                        </li>
+                        {/*
+                            <li className="nav-item">
+                                <Link className="nav-link text-purple link-page" to="/streams">Eventos</Link>
+                            </li>*/
+                        }
 
                         <li className="nav-item">
                             <Link className="nav-link text-purple link-page" to="/login">Login</Link>

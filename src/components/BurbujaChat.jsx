@@ -4,7 +4,6 @@ const BurbujaChat = ({user,message,time}) =>{
     if(userdata.object.nombre.stringValue == user.stringValue){
         color='message-me'
     }
-    console.log(color)
     return (
         <>
             <div className={`border ${color} rounded p-2 m-2 border-3`}>

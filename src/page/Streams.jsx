@@ -100,7 +100,7 @@ const Streams = () =>{
                 <div className="row">
                     <div className="col-12 col-md-7 col-lg-9">
                         {
-                            <iframe src={`https://player.twitch.tv/?channel=${eventSelect.canal}&parent=localhost`}  className="iframe"></iframe>
+                            <iframe src={`https://player.twitch.tv/?channel=${eventSelect.canal}&parent=hackathom-7e6dc.web.app`}  className="iframe"></iframe>
                           
                         }
                         
@@ -159,7 +159,7 @@ const Streams = () =>{
                                 
                             <div className="input-group position-absolute bottom-0 ">
                                 <input type="text" className="form-control " id="input-message" placeholder="Envianos tu consulta" onKeyDown={event => handleKeyDown(event)}/>
-                                <button className="btn btn-flow" onClick={sendMessage} >Enviar</button>
+                                <button className="btn btn-flow"  >Enviar</button>
                             </div>
                             
                         </div>
