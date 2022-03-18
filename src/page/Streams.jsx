@@ -1,20 +1,32 @@
 
 import { useEffect, useRef, useState } from "react"
-import { collection ,onSnapshot, addDoc, where, query, orderBy,limit,getDoc, Timestamp } from "firebase/firestore"
+import { collection ,onSnapshot, addDoc, where, query, orderBy,limit,getDoc, Timestamp, doc } from "firebase/firestore"
 import BurbujaChat from "../components/BurbujaChat"
 import { db } from "../utils/firebaseConf"
 import BurbujaQuest from "../components/BurbujaQuest"
 import BtnEvents from "../components/BtnEvents"
+import { useParams } from "react-router-dom"
 
 
 const Streams = () =>{
     const [chat,setChat]= useState([])
     const [quests,setQuests]= useState([])
     const [events,setEvents]= useState([])
+    const [eventSelect,setEventSelect]= useState({})
+    const param=useParams()
     const containerMessage=useRef(null)
     const containerQuest=useRef(null)
     const conllectionName='chat'
     const userName='NuevoUsuario'
+    useEffect(async()=>{
+        const docSnap=await getDoc(doc(db,"eventos",param.id))
+        if (docSnap.exists()) {
+            setEventSelect(docSnap.data())
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+    },[param])
     useEffect(()=>{
         if(db){
             onSnapshot(query( collection(db,conllectionName),orderBy("time"),limit(100)),(snapChat)=>{
@@ -25,7 +37,7 @@ const Streams = () =>{
                 setChat(data)
                 scrollDown(containerMessage)
             })
-            onSnapshot(query( collection(db,'eventos')),(snapEvents)=>{
+            onSnapshot(query( collection(db,'eventos'),where("fechaFin", ">=", Timestamp.now())),(snapEvents)=>{
                 const data = snapEvents.docs.map(doc => ({
                     ... doc.data(),
                     id:doc.id
@@ -83,7 +95,11 @@ const Streams = () =>{
                 <h1 className="text-center mt-3 mb-3">Bienvenidos</h1>
                 <div className="row">
                     <div className="col-12 col-md-7 col-lg-9">
-                        <iframe src="https://player.twitch.tv/?channel=farbenfuchs&parent=localhost"  className="iframe"></iframe>
+                        {
+                            <iframe src={`https://player.twitch.tv/?channel=${eventSelect.canal}&parent=localhost`}  className="iframe"></iframe>
+                          
+                        }
+                        
                         <div className="btn-container">
                             <div className="btn-group">
                             {
@@ -91,6 +107,7 @@ const Streams = () =>{
                                     return <BtnEvents
                                     key={item.id}
                                     btn={item.nombreEvento}
+                                    id={item.id}
                                     />
                                 })
                             }

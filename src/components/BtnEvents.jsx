@@ -1,6 +1,9 @@
-const BtnEvents = ({btn}) =>{
+import { Link } from "react-router-dom"
+
+const BtnEvents = ({key,btn,id}) =>{
+
     return (
-        <button className="btn btn-teco text-light me-2 ws-nowap">{btn}</button>
+        <Link className="btn btn-teco text-light me-2 ws-nowap" to={`/streams/${id}`}>{btn}</Link>
     )
 }
 export default BtnEvents
