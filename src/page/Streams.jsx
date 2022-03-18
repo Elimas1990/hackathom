@@ -1,15 +1,16 @@
 
 import { useEffect, useRef, useState } from "react"
-import { collection ,onSnapshot, addDoc, where, query, orderBy,limit,getDoc,exists } from "firebase/firestore"
+import { collection ,onSnapshot, addDoc, where, query, orderBy,limit,getDoc, Timestamp } from "firebase/firestore"
 import BurbujaChat from "../components/BurbujaChat"
-import fetchChat from "../utils/fetchChat"
 import { db } from "../utils/firebaseConf"
 import BurbujaQuest from "../components/BurbujaQuest"
+import BtnEvents from "../components/BtnEvents"
 
 
 const Streams = () =>{
     const [chat,setChat]= useState([])
     const [quests,setQuests]= useState([])
+    const [events,setEvents]= useState([])
     const containerMessage=useRef(null)
     const containerQuest=useRef(null)
     const conllectionName='chat'
@@ -24,27 +25,29 @@ const Streams = () =>{
                 setChat(data)
                 scrollDown(containerMessage)
             })
-            onSnapshot(query( collection(db,'consultas'),where('estadoPregunta','==',true)),(snapQuest)=>{
-             
-                const data=snapQuest.docs.map(doc => {
-                    const obj={
-                        ... doc.data(),
-                        id:doc.id
-                    }
-                    const snapData=getRefData(doc.data().usuarios)
-                    snapData.then(item => {
-                        return Object.assign(obj,{user_data:item.data()})
+            onSnapshot(query( collection(db,'eventos')),(snapEvents)=>{
+                const data = snapEvents.docs.map(doc => ({
+                    ... doc.data(),
+                    id:doc.id
+                }))
+                setEvents(data)
+            })
+            onSnapshot(query( collection(db,'consultas'),where('estadoPregunta','==',true)),async(snapQuest)=>{
+            
+                const data= await Promise.all(
+                    await snapQuest.docs.map(async doc => {
+                        const obj={
+                            ... doc.data(),
+                            id:doc.id
+                        }
+                        const snapData= await getRefData(obj.idUsuarios)
+
+                        return {...obj,user:snapData.data()}
                     })
-                    return new Promise((res,rej)=>{
-                        res(obj)
-                    }) 
-                    
-                })
-                data.then(item=>{
-                    setQuests(data)
-                    scrollDown(containerQuest)
-                })
-                
+                )
+                setQuests(data)
+                scrollDown(containerQuest)
+
             })
         }
     },[db])
@@ -57,7 +60,7 @@ const Streams = () =>{
         await addDoc(collection(db,conllectionName),{
             user:userName,
             message:document.getElementById("input-message").value,
-            time:new Date
+            time:Timestamp.now()
         })
         document.getElementById("input-message").value=''
     }
@@ -79,10 +82,25 @@ const Streams = () =>{
             <div className="container">
                 <h1 className="text-center mt-3 mb-3">Bienvenidos</h1>
                 <div className="row">
-                    <div className="col-9">
+                    <div className="col-12 col-md-7 col-lg-9">
                         <iframe src="https://player.twitch.tv/?channel=farbenfuchs&parent=localhost"  className="iframe"></iframe>
+                        <div className="btn-container">
+                            <div className="btn-group">
+                            {
+                                events.map(item =>{
+                                    return <BtnEvents
+                                    key={item.id}
+                                    btn={item.nombreEvento}
+                                    />
+                                })
+                            }
+                            </div>
+                        
+
+                        </div>
+                        
                     </div>
-                    <div className="col-3">
+                    <div className="col-12 col-md-5 col-lg-3">
                         <div className="border chat-container border-2 border-dark rounded-3 position-relative mb-3">
                             <div className="bg-teco text-light text-center">Chat Online</div>
                             <div className="message-container" id="message-container" ref={containerMessage}>
@@ -107,21 +125,14 @@ const Streams = () =>{
                             <div className="bg-teco text-light text-center">Pregunta para oradores</div>
                             <div className="message-container" id="message-container" ref={containerQuest}>
                                 {
-                                    console.log(quests[0]?.user_data)
-                                    /*quests.map(item => {
+                                    
+                                    quests.map(item => {
                                         return <BurbujaQuest
                                         key={item.id} 
                                         pregunta={item.pregunta}
-                                        user={item?.user_data?.nombre}
+                                        user={item.user}
                                         time={item.time}/>})
-                                        
-                                    /*quests.map(item =>{
-                                        return <BurbujaQuest
-                                        key={item.id} 
-                                        pregunta={item.pregunta}
-                                        user={item.user_data}
-                                        time={item.time}/>
-                                    })*/
+
                                 }
                             </div>
                                 
