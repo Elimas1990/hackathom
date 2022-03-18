@@ -1,6 +1,7 @@
 $color-flow:rgb(33,211,162);
 $color-teco:rgb(60,1,160);
 $color-personal:rgb(1,169,240);
+$color-me:rgb(223,73,87);
 
 *{
   color:$color-teco
@@ -34,6 +35,10 @@ $color-personal:rgb(1,169,240);
 .message-others{
   border-color:$color-flow!important;
   background-color:rgba(33,211,162,0.5);
+}
+.message-me{
+  border-color:$color-me!important;
+  background-color:rgb(223,73,87,0.5);
 }
 .message-quest{
   border-color:$color-personal!important;

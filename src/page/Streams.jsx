@@ -17,7 +17,7 @@ const Streams = () =>{
     const containerMessage=useRef(null)
     const containerQuest=useRef(null)
     const conllectionName='chat'
-    const userName='NuevoUsuario'
+    const userName=JSON.parse(localStorage.getItem('user'))
     useEffect(async()=>{
         const docSnap=await getDoc(doc(db,"eventos",param.id))
         if (docSnap.exists()) {
@@ -69,8 +69,12 @@ const Streams = () =>{
         return await getDoc(docref);
     }
     const sendMessage=async()=>{
+        let chat_name="NN"
+        if(userName.object.nombre){
+            chat_name=userName.object.nombre
+        }
         await addDoc(collection(db,conllectionName),{
-            user:userName,
+            user:chat_name,
             message:document.getElementById("input-message").value,
             time:Timestamp.now()
         })
