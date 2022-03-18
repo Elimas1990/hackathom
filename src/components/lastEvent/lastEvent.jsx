@@ -1,8 +1,9 @@
 import React from "react";
-import './nextEvent.css';
+import './lastEvent.css';
+import { Link } from "react-router-dom";
 
 
-export const NextEvent = ({
+export const LastEvent = ({
     imagen,
     nombreEvento,
     descripcionEvento,
@@ -33,13 +34,14 @@ export const NextEvent = ({
                     <div className="card-body">
                         <h5 className="card-title m-0  mb-1">{nombreEvento}</h5>
                         <p className="card-text m-0 mt-1 mb-1">{descripcionEvento}</p>
-                        <button type="button" class="btn btn-secondary btn-sm me-3">Inscribirse</button><button type="button" class="btn btn-secondary btn-sm">Preguntas</button>
+                        <button type="button" class="btn btn-secondary btn-sm">Ver evento</button>
                     </div>
-                  
+
                 </div>
                 <div className="card-footer text-muted">
-                <p className="text-center mb-0">{fechaInicio.toDate().toLocaleDateString("es-AR", optionsCalendarioLargo)} - {fechaFin.toDate().toLocaleDateString("es-AR", optionsCalendarioLargo)}</p>
-                    </div>
+                    <p className="text-center mb-0">{fechaInicio.toDate().toLocaleDateString("es-AR", optionsCalendarioLargo)} - {fechaFin.toDate().toLocaleDateString("es-AR", optionsCalendarioLargo)}</p>
+                </div>
+
             </div>
         </div>
     );
